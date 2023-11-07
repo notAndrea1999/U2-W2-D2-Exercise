@@ -1,7 +1,7 @@
 package andreademasi.controllers;
 
-import andreademasi.entities.User;
-import andreademasi.services.UserService;
+import andreademasi.entities.Blog;
+import andreademasi.services.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,37 +12,37 @@ import java.util.List;
 @RequestMapping("/blogPosts")
 public class BlogController {
     @Autowired
-    private UserService userService;
+    private BlogService blogService;
 
-    //GET authors
+    //GET blogpost
     @GetMapping
-    List<User> getAllAuthors() {
-        return userService.getAllAuthors();
+    List<Blog> getAllBlogs() {
+        return blogService.getAllBlogs();
     }
 
-    //POST crea un nuovo autore
+    //POST crea un nuovo blogpost
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    User save(@RequestBody User user) {
-        return userService.save(user);
+    Blog save(@RequestBody Blog blog) {
+        return blogService.save(blog);
     }
 
-    //GET author by id
+    //GET blogpost by id
     @GetMapping("/{id}")
-    User findAuthorById(@PathVariable long id) {
-        return userService.findAuthorById(id);
+    Blog findBlogById(@PathVariable long id) {
+        return blogService.findBlogById(id);
     }
 
-    //PUT modifica dello specifico autore
+    //PUT modifica dello specifico blogpost
     @PutMapping("/{id}")
-    User findByIdAndUpdate(@PathVariable long id, @RequestBody User user) {
-        return userService.findByIdAndUpdate(id, user);
+    Blog findByIdAndUpdate(@PathVariable long id, @RequestBody Blog blog) {
+        return blogService.findByIdAndUpdate(id, blog);
     }
 
-    //DELETE dell'author
+    //DELETE del blogpost
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void findByIdAndDelete(@PathVariable long id) {
-        userService.findByIdAndDelete(id);
+        blogService.findByIdAndDelete(id);
     }
 }

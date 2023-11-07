@@ -1,7 +1,6 @@
 package andreademasi.services;
 
 import andreademasi.entities.Blog;
-import andreademasi.entities.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,11 +13,11 @@ public class BlogService {
     private List<Blog> blogList = new ArrayList<>();
 
     //GET authors
-    public List<Blog> getAllAuthors() {
+    public List<Blog> getAllBlogs() {
         return this.blogList;
     }
 
-    //POST crea un nuovo autore
+    //POST crea un nuovo blog
     public Blog save(Blog blog) {
         Random rndm = new Random();
         blog.setId(rndm.nextInt(1, 100));
@@ -26,36 +25,36 @@ public class BlogService {
         return blog;
     }
 
-    //GET author by id
+    //GET blog by id
 
-    public User findAuthorById(long id) {
-        User foundUser = null;
-        for (User user : this.authors) {
-            if (user.getId() == id) {
-                foundUser = user;
+    public Blog findBlogById(long id) {
+        Blog foundBlog = null;
+        for (Blog blog : this.blogList) {
+            if (blog.getId() == id) {
+                foundBlog = blog;
             }
         }
-        return foundUser;
+        return foundBlog;
     }
 
-    //PUT modifica dello specifico autore
-    public User findByIdAndUpdate(long id, User user) {
-        User foundUser = this.findAuthorById(id);
-        foundUser.setId(id);
-        foundUser.setName(user.getName());
-        foundUser.setSurname(user.getSurname());
-        foundUser.setEmail(user.getEmail());
-        foundUser.setBirthDate(user.getBirthDate());
-        foundUser.setAvatar(user.getAvatar());
-        return foundUser;
+    //PUT modifica dello specifico blog
+    public Blog findByIdAndUpdate(long id, Blog blog) {
+        Blog foundBlog = this.findBlogById(id);
+        foundBlog.setId(id);
+        foundBlog.setCategory(blog.getCategory());
+        foundBlog.setTitle(blog.getTitle());
+        foundBlog.setCover(blog.getCover());
+        foundBlog.setContenuto(blog.getContenuto());
+        foundBlog.setReadingTime(blog.getReadingTime());
+        return foundBlog;
     }
 
-    //DELETE dell'author
+    //DELETE del blog
     public void findByIdAndDelete(long id) {
-        ListIterator<User> iterator = this.authors.listIterator();
+        ListIterator<Blog> iterator = this.blogList.listIterator();
 
         while (iterator.hasNext()) {
-            User current = iterator.next();
+            Blog current = iterator.next();
             if (current.getId() == id) {
                 iterator.remove();
             }
